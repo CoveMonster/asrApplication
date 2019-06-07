@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 from PyQt5.QtWidgets import (QWidget, QAction, qApp, QLabel,
                              QLineEdit, QTextEdit, QGridLayout, QMainWindow, QApplication,
-                             QTextBrowser, QListWidget, QSplitter)
+                             QTextBrowser, QListWidget, QSplitter, QToolBar)
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import (QSettings, Qt, QByteArray)
 import datetime
@@ -55,29 +55,34 @@ class Ui_MainWindow(QMainWindow):
         guide_menu.addAction(author_intro_item)
 
         # 定义工具栏
-        self.toolbarGmm = self.addToolBar('GMM')
-        self.toolbarModel = self.addToolBar('Model')
-        self.toolbarSetting = self.addToolBar('Setting')
+        # self.toolbarGmm = self.addToolBar('GMM')
+        self.toolbarGmm = QToolBar()
+        self.addToolBar(Qt.LeftToolBarArea, self.toolbarGmm)
+        # self.toolbarModel = self.addToolBar('Model')
+        # self.toolbarSetting = self.addToolBar('Setting')
 
         # add GMM UBM button
-        gmmAction = QAction(QIcon('icon/cloud.png'), '基础模型', self)
+        gmmAction = QAction(QIcon('icon/cloud.png'), '选择UBM', self)
         self.toolbarGmm.addAction(gmmAction)
-
+        for oen in range(0,5):
+            self.toolbarGmm.addSeparator()
         # add 'new model' button
-        newModelAction = QAction(QIcon('icon/file-fill.png'), '训练新模型', self)
-        self.toolbarModel.addAction(newModelAction)
-
+        newModelAction = QAction(QIcon('icon/file-fill.png'), '选择GMM', self)
+        self.toolbarGmm.addAction(newModelAction)
+        for oen in range(0,5):
+            self.toolbarGmm.addSeparator()
         # add 'select model' button
-        selectModelAction = QAction(QIcon('icon/file plus-fill.png'), '选择模型', self)
-        self.toolbarModel.addAction(selectModelAction)
-
+        selectModelAction = QAction(QIcon('icon/file plus-fill.png'), '选择课堂视频', self)
+        self.toolbarGmm.addAction(selectModelAction)
+        for oen in range(0,5):
+            self.toolbarGmm.addSeparator()
         # add 'save model' button
-        saveModelAction = QAction(QIcon('icon/save.png'), '保存模型', self)
-        self.toolbarModel.addAction(saveModelAction)
+        # saveModelAction = QAction(QIcon('icon/save.png'), '保存模型', self)
+        # self.toolbarModel.addAction(saveModelAction)
 
         # add 'setting' button
-        settingAction = QAction(QIcon('icon/cog.png'), '设置', self)
-        self.toolbarSetting.addAction(settingAction)
+        # settingAction = QAction(QIcon('icon/cog.png'), '设置', self)
+        # self.toolbarSetting.addAction(settingAction)
 
     def createDesktop(self):
         self.modelViewList = QListWidget()
